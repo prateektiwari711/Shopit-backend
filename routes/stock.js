@@ -67,12 +67,12 @@ router.post("/update-sales", authenticateToken, async (req, res) => {
 });
 
 router.put("/update/:id", authenticateToken, async (req, res) => {
-  const { quantity, price } = req.body;
+  const { quantity, price, lastUpdated } = req.body;
 
   try {
     const updatedStock = await Stock.findOneAndUpdate(
       { _id: req.params.id, user: req.user },
-      { $set: { quantity, price } },
+      { $set: { quantity, price, lastUpdated } },
       { new: true }
     );
 
